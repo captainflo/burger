@@ -1,42 +1,56 @@
-<h1>Burgers!</h1>
-
-<h2>Burgers that are not devoured!</h2>
-
-<ul>
-  {{#each burgers}}
-    {{#unless devoured}}
-        {{this.id}}. {{this.burger_name}}
-        <button class="change-devoured" data-id="{{id}}" data-newdevoured="{{devoured}}">
-            {{#if devoured}}DEVOURED TIME!{{else}}Eat me!{{/if}}
-        </button>
-    {{/unless}}
-  {{/each}}
-</ul>
-
-<h2>burgers that are devoured!</h2>
-
-<ul>
-  {{#each burgers}}
-    {{#if devoured}}
-      {{this.id}}. {{this.burger_name}}
-    {{/if}}
-  {{/each}}
-</ul>
-
-<h2>Add a Burger</h2>
-<form class="create-form">
-  <div class="form-group">
-    <label for="burger">Burger Name:</label>
-    <input type="text" id="burger" name="name">
+<div class="container">
+  <h1 class="text-center">Burgers!</h1>
+  <div class="text-center"><i class="fas fa-hamburger"></i></div>
+  <div class="row">
+      <div class="col-md-12 text-center">
+    <h2>Add a Burger</h2>
+  <form class="create-form">
+    <div class="form-group">
+      <label for="burger">Burger Name:</label>
+      <input type="text" id="burger" name="name">
+       <button  class="btn btn-success" type="submit">Add Burger</button>
+    </div>
+  </form>
   </div>
-  <button type="submit">Add Burger</button>
-</form>
+
+    <div class="col-md-6 text-center">
+      <h2>Burgers that are not devoured!</h2>
+      <ul class="list-group">
+        {{#each burgers}}
+          {{#unless devoured}}
+            <li class="list-group-item">
+              {{this.id}}. {{this.burger_name}}
+              <button class="change-devoured btn btn-success" class="btn btn-success" data-id="{{id}}" data-newdevoured="{{devoured}}">
+                  {{#if devoured}}DEVOURED TIME!{{else}}Eat me!{{/if}}
+              </button>
+            </li>
+          {{/unless}}
+        {{/each}}
+      </ul>
+    </div>
+
+    <div class="col-md-6 text-center">
+      <h2>burgers that are devoured!</h2>
+      <ul class="list-group">
+        {{#each burgers}}
+          {{#if devoured}}
+          <li class="list-group-item">
+            {{this.id}}. {{this.burger_name}} <i class="fas fa-cheeseburger"></i>
+          </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
 
   $(".change-devoured").on("click", function(event) {
+    event.preventDefault();
     var id = $(this).data("id");
-    var newDevoured = 1
+    var newDevoured = 1;
 
     var newBurgerState = {
       devoured: newDevoured
